@@ -446,6 +446,7 @@ h5 {
 .typing-textarea.faq {
   width: 25rem;
   position: relative;
+  pointer-events: none;
 }
 
 .typing-textarea.faq span#send-btn {
