@@ -21,6 +21,8 @@ const loadDataFromLocalstorage = () => {
 
 
 
+
+
 </div>
 
 <div class="frequently-asked">
@@ -291,6 +293,11 @@ const handleOutgoingChat = () => {
     chatContainer.appendChild(outgoingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
     setTimeout(showTypingAnimation(userText), 500);
+
+    //remove frequently asked chatbot
+    if(document.querySelector('.chat-container .chat.outgoing')){
+        document.querySelector('.frequently-asked').style.display = 'none';
+    }
 }
 
 deleteButton.addEventListener("click", () => {
@@ -322,12 +329,12 @@ chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
         handleOutgoingChat();
-        if(document.querySelector('.chat-container .chat.outgoing')){
-            document.querySelector('.frequently-asked').style.display = 'none';
-        }
+        
 
     }
 });
+
+document.querySelector('.typing-textarea.faq span#send-btn').addEventListener("click",handleOutgoingChat)
 
 loadDataFromLocalstorage();
 sendButton.addEventListener("click", handleOutgoingChat);
