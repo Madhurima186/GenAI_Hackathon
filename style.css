@@ -391,7 +391,7 @@ span.material-symbols-rounded {
 .chatbox {
   width: 75%;
   height: 100vh;
-  background-image: url('https://business.adobe.com/blog/the-latest/media_1e332ff7a9de723784208830e66415291e0120f8b.png?width=2000&format=webply&optimize=medium');
+  background-image: url(https://business.adobe.com/blog/the-latest/media_1e332ff7a9de723784208830e66415291e0120f8b.png?width=2000&format=webply&optimize=medium);
   background-size: cover;
   background-position: center;
 }
@@ -451,7 +451,7 @@ h5 {
 .typing-textarea.faq span#send-btn {
   visibility: visible;
   bottom: 6px;
-  right:-10px;
+  right: -10px;
   width: 55px;
   height: 55px;
   display: flex;
