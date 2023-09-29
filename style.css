@@ -7,7 +7,7 @@
   font-family: "Poppins", sans-serif;
 }
 :root {
-  --text-color: #FFFFFF;
+  --text-color: #5b5e71;
   --icon-color: #ACACBE;
   --icon-hover-bg: #5b5e71;
   --placeholder-color: #dcdcdc;
@@ -15,6 +15,7 @@
   --incoming-chat-bg: #444654;
   --outgoing-chat-border: #343541;
   --incoming-chat-border: #444654;
+  
 }
 .light-mode {
   --text-color: #343541;
@@ -33,8 +34,8 @@ body {
 /* Chats container styling */
 .chat-container {
   overflow-y: auto;
-  max-height: 100vh;
-  padding-bottom: 150px;
+  max-height: 83vh;
+  width:100%;
 }
 :where(.chat-container, textarea)::-webkit-scrollbar {
   width: 6px;
@@ -52,20 +53,23 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 70vh;
+  height: 74vh;
   padding: 0 10px;
   text-align: center;
   color: var(--text-color);
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
 }
 .default-text h1 {
   font-size: 3.3rem;
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
 }
 .default-text p {
   margin-top: 10px;
   font-size: 1.1rem;
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
 }
 .chat-container .chat {
-  padding: 25px 10px;
+
   display: flex;
   justify-content: center;
   color: var(--text-color);
@@ -73,10 +77,28 @@ body {
 .chat-container .chat.outgoing {
   background: var(--outgoing-chat-bg);
   border: 1px solid var(--outgoing-chat-border);
+  width: 60%;
+    border: solid 5px black;
+    padding: 1rem;
+    margin: 1rem;
+    margin-left: 18rem;
+    margin-right: 2rem;
+    border-radius: 40px 40px 0px 40px;
+    border-color: rgb(234, 234, 234);
+    background-color: rgb(250, 250, 250);
 }
 .chat-container .chat.incoming {
   background: var(--incoming-chat-bg);
   border: 1px solid var(--incoming-chat-border);
+  width: 60%;
+    border: solid 5px black;
+    padding: 1rem;
+    margin: 1rem;
+    margin-left: 8rem;
+    margin-right: 2rem;
+    border-radius: 40px 40px 40px 0px;
+    border-color: rgb(234, 234, 234);
+    background-color: rgb(250, 250, 250);
 }
 .chat .chat-content {
   display: flex;
@@ -84,6 +106,7 @@ body {
   width: 100%;
   align-items: flex-start;
   justify-content: space-between;
+
 }
 span.material-symbols-rounded {
   user-select: none;
@@ -97,10 +120,13 @@ span.material-symbols-rounded {
 }
 .chat:hover .chat-content:not(:has(.typing-animation), :has(.error)) span {
   visibility: visible;
+
+ margin-top: 5px;
 }
 .chat .chat-details {
   display: flex;
   align-items: center;
+  font-family:adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
 }
 .chat .chat-details img {
   width: 35px;
@@ -108,13 +134,17 @@ span.material-symbols-rounded {
   align-self: flex-start;
   object-fit: cover;
   border-radius: 2px;
+  margin: auto;
 }
 .chat .chat-details p {
   white-space: pre-wrap;
-  font-size: 1.05rem;
+  font-size: 1rem;
   padding: 0 50px 0 25px;
   color: var(--text-color);
   word-break: break-word;
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+  text-align: left;
+  
 }
 .chat .chat-details p.error {
   color: #e55865;
@@ -152,12 +182,12 @@ span.material-symbols-rounded {
 .typing-container {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 75%;
   display: flex;
-  padding: 20px 10px;
+  padding: 20px 8rem;
   justify-content: center;
   background: var(--outgoing-chat-bg);
-  border-top: 1px solid var(--incoming-chat-border);
+  border-top: 1.5px solid #D9D9E3
 }
 .typing-container .typing-content {
   display: flex;
@@ -183,6 +213,7 @@ span.material-symbols-rounded {
   overflow-y: auto;
   background: var(--incoming-chat-bg);
   outline: 1px solid var(--incoming-chat-border);
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
 }
 .typing-textarea textarea::placeholder {
   color: var(--placeholder-color);
@@ -255,4 +286,108 @@ span.material-symbols-rounded {
   span.material-symbols-rounded {
     font-size: 1.25rem!important;
   }
+}
+.GPT-container
+{
+  display: flex;
+  flex-direction: row;
+}
+.intro-container
+{
+  width:25rem;
+  background-image: url(https://cimage.adobe.com/hackaton/graphic3.png);
+  border-right: 1.5px solid #D9D9E3;
+}
+.intro-container ul{
+  display: block;
+  height: 54vh;
+  padding: 0px 50px;
+  text-align: left;
+  margin: 2.5rem 0rem;
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+  line-height: 30px;
+  color: #3b3939;
+  font-size: 13.5px;
+
+}
+
+.intro-container p{
+  display: block;
+    height: 10vh;
+    padding: 0 25px;
+    text-align: center;
+    margin:2rem 0rem;
+    font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+    line-height: 30px;
+    color:#3b3939;
+    font-size: 15.5px;;
+    
+
+}
+.intro-container h2{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 10vh;
+    padding: 0 10px;
+    text-align: center;
+    margin:0rem 0rem;
+    font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+    font-size: 16.8px;
+}
+.chatbox
+{
+  width:75%;
+  height: 100vh;
+}
+.exp-button
+{
+  width: 25rem;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid #D9D9E3;
+  
+}
+.header-text
+{
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Trebuchet MS,Lucida Grande,sans-serif;
+  color: #2f2d2d;
+  font-weight: 500;
+  font-size: 15px;
+}
+chat-inside-text
+{
+  --text-color: #343541;
+  --icon-color: #a9a9bc;
+  --icon-hover-bg: #f1f1f3;
+  --placeholder-color: #6c6c6c;
+  --outgoing-chat-bg: #FFFFFF;
+  --incoming-chat-bg: #F7F7F8;
+  --outgoing-chat-border: #FFFFFF;
+  --incoming-chat-border: #D9D9E3;
+  margin: 0;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  font-size: 1rem;
+  padding: 0 50px 0 25px;
+  color: var(--text-color);
+  word-break: break-word;
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+  text-align: left;
+}
+h5{
+  margin: 10px;
+  font-family: adobe-clean,Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+}
+.frequently-asked
+{
+  display: flex;
+  justify-content: space-around;
+  padding: 0rem 10rem;
+}
+.typing-textarea.faq
+{
+  width:25rem;
 }
