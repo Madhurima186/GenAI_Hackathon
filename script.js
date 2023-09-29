@@ -3,9 +3,12 @@ const sendButton = document.querySelector("#send-btn");
 const chatContainer = document.querySelector(".chat-container");
 const themeButton = document.querySelector("#theme-btn");
 const deleteButton = document.querySelector("#delete-btn");
+let conversation_id = "";
+let emeraldContext = false;
+const pElement = document.createElement("p");
 
 let userText = null;
-const API_KEY = "PASTE-YOUR-API-KEY-HERE"; // Paste your API key here
+const API_KEY = "eyJhbGciOiJSUzI1NiIsIng1dSI6Imltc19uYTEtc3RnMS1rZXktYXQtMS5jZXIiLCJraWQiOiJpbXNfbmExLXN0ZzEta2V5LWF0LTEiLCJpdHQiOiJhdCJ9.eyJpZCI6IjE2OTU5NjU4MzE1NDFfZDEwMDk3ZmEtNTg4Ny00Yjg2LWFlOGQtNjkxODE3YWQ1ZGQzX2V3MSIsInR5cGUiOiJhY2Nlc3NfdG9rZW4iLCJjbGllbnRfaWQiOiJzY29lLWhhY2thdGhvbi1hcHAiLCJ1c2VyX2lkIjoic2NvZS1oYWNrYXRob24tYXBwQEFkb2JlSUQiLCJhcyI6Imltcy1uYTEtc3RnMSIsImFhX2lkIjoic2NvZS1oYWNrYXRob24tYXBwQEFkb2JlSUQiLCJjdHAiOjAsInBhYyI6InNjb2UtaGFja2F0aG9uLWFwcF9zdGciLCJydGlkIjoiMTY5NTk2NTgzMTU0MV9jOTk3MmI2OS01MTZmLTQwMTEtYWU4Ny1jNGZkNGEyZjNiM2RfZXcxIiwibW9pIjoiZGVlMGIzNDMiLCJydGVhIjoiMTY5NzE3NTQzMTU0MSIsImV4cGlyZXNfaW4iOiI4NjQwMDAwMCIsInNjb3BlIjoic3lzdGVtIiwiY3JlYXRlZF9hdCI6IjE2OTU5NjU4MzE1NDEifQ.GAjLfCZ8HKuFf_w2TvzPC13PxKPu-gDACTujEp6fWLYIgExaA-_M3iPws7M1qaMKQrY_XDI41acto4g12GjBy6aPmccJpsw2u8SIKq4s6_2CAcC8qIWYUUMxC8CVzuZbKfyY1cPKaJN51-AahzBrCZ2NB6VSSYtjFrqkJMwJmIsuwMc7YGMjymx6IrC7Lo5EkrNBtiK2d2_RN200O2_9H68iT-VsuirURO3MLa1N8REmw0Kcy1jsVMELO5j7pFM0gK2oQahWrYSSTw7jL6yjIFouFLWU9kX4AWtxQsmlo6aTqzyJGWwBgfVE2-loCVtK0Em70mE3rjr-V1H8uHy9rw"; // Paste your API key here
 
 const loadDataFromLocalstorage = () => {
     // Load saved chats and theme from local storage and apply/add on the page
@@ -15,8 +18,8 @@ const loadDataFromLocalstorage = () => {
     themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 
     const defaultText = `<div class="default-text">
-                            <h1>Target GPT</h1>
-                            <p>Start a conversation and explore the power of AI through target.<br> Your chat history will be displayed here.</p>
+                            <h1>ChatGPT Clone</h1>
+                            <p>Start a conversation and explore the power of AI.<br> Your chat history will be displayed here.</p>
                         </div>`
 
     chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
@@ -31,8 +34,105 @@ const createChatElement = (content, className) => {
     return chatDiv; // Return the created chat div
 }
 
-const getChatResponse = async (incomingChatDiv) => {
-    const API_URL = "https://api.openai.com/v1/completions";
+const getConversation = async (incomingChatDiv, userText) => {
+    if(!localStorage.all_chats){
+        const API_URL = "https://firefall-stage.adobe.io/v2/conversation";
+        // Define the properties and data for the API request
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`,
+                "x-api-key" : "scoe-hackathon-app",
+                "x-gw-ims-org-id" : "154340995B76EEF60A494007@AdobeOrg"
+            },
+            body: JSON.stringify({
+                    "conversation_name": "Target GPT_"+ Math.floor
+                    (Math.random() * 90 + 10) ,
+                    "capability_name": "completions_capability"
+                })
+        }
+
+        // Send POST request to API, get response and set the reponse as paragraph element text
+        try {
+            const response = await (await fetch(API_URL, requestOptions)).json();
+            console.log(response.conversation_id, "::::response conversation_id");
+            conversation_id = response.conversation_id;
+        } catch (error) { // Add error class to the paragraph element and set error text
+            pElement.classList.add("error");
+            pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
+        }
+    }
+    if(!emeraldContext){
+        getChatResponse(incomingChatDiv, userText, conversation_id);
+    }else{
+        getEmeraldContext(incomingChatDiv, userText, conversation_id);
+    }
+}
+
+
+const getEmeraldContext = async (incomingChatDiv, userText, conversation_id) => {
+    const API_URL = "https://emerald-stage.adobe.io/collection/Adobe_Target_Collection/search";
+    // Define the properties and data for the API request
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`,
+            "x-api-key" : "scoe-hackathon-app",
+            "x-gw-ims-org-id" : "154340995B76EEF60A494007@AdobeOrg"
+        },
+        body: JSON.stringify({
+            "input_format": userText.indexOf("https") > -1 ? "url" : "text" ,
+            "data": userText,
+            "top_p" : 1
+        })
+    }
+
+    // Send POST request to API, get response and set the reponse as paragraph element text
+    try {
+        const response = await (await fetch(API_URL, requestOptions)).json();
+        console.log(response, "::::response");
+        getEmeraldContextData(incomingChatDiv, userText, 
+            response[0].asset_id, conversation_id)
+    } catch (error) { // Add error class to the paragraph element and set error text
+        pElement.classList.add("error");
+        pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
+    }
+
+}
+
+const getEmeraldContextData = async (incomingChatDiv, userText, 
+    asset_id, conversation_id) => {
+    const API_URL = "https://emerald-stage.adobe.io//collection/Adobe_Target_Collection/asset/"+asset_id;
+    // Define the properties and data for the API request
+    const requestOptions = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`,
+            "x-api-key" : "scoe-hackathon-app",
+            "x-gw-ims-org-id" : "154340995B76EEF60A494007@AdobeOrg"
+        }
+    }
+
+    // Send POST request to API, get response and set the reponse as paragraph element text
+    try {
+        const response = await (await fetch(API_URL, requestOptions)).json();
+        console.log(response, "::::response");
+        getChatResponseEmerald(incomingChatDiv, userText, 
+            response.data, conversation_id)
+        //pElement.textContent = response.dialogue.answer;
+    } catch (error) { // Add error class to the paragraph element and set error text
+        pElement.classList.add("error");
+        pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
+    }
+
+}
+
+const getChatResponseEmerald = async (incomingChatDiv, userText, 
+    context, conversation_id) => {
+    const API_URL = "https://firefall-stage.adobe.io//v1/completions";
     const pElement = document.createElement("p");
 
     // Define the properties and data for the API request
@@ -40,22 +140,32 @@ const getChatResponse = async (incomingChatDiv) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`
+            "Authorization": `Bearer ${API_KEY}`,
+            "x-api-key" : "scoe-hackathon-app",
+            "x-gw-ims-org-id" : "154340995B76EEF60A494007@AdobeOrg"
         },
         body: JSON.stringify({
-            model: "text-davinci-003",
-            prompt: userText,
-            max_tokens: 2048,
-            temperature: 0.2,
-            n: 1,
-            stop: null
+                "dialogue":{
+                    "conversation_id" : conversation_id,
+                    "question": "\n'"+context+"'\n" + userText
+                },
+                "llm_metadata": {
+                    "model_name": "gpt-35-turbo",
+                    "temperature": 0.0,
+                    "top_p": 1.0,
+                    "frequency_penalty": 0,
+                    "presence_penalty": 0,
+                    "n": 1,
+                    "llm_type": "azure_chat_openai"
+                }
         })
     }
 
     // Send POST request to API, get response and set the reponse as paragraph element text
     try {
         const response = await (await fetch(API_URL, requestOptions)).json();
-        pElement.textContent = response.choices[0].text.trim();
+        console.log(response, "::::response");
+        pElement.textContent = response.generations[0][0].text;
     } catch (error) { // Add error class to the paragraph element and set error text
         pElement.classList.add("error");
         pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
@@ -66,6 +176,46 @@ const getChatResponse = async (incomingChatDiv) => {
     incomingChatDiv.querySelector(".chat-details").appendChild(pElement);
     localStorage.setItem("all-chats", chatContainer.innerHTML);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+}
+
+const getChatResponse = async (incomingChatDiv, userText, conversation_id) => {
+    const API_URL = "https://firefall-stage.adobe.io/v2/query";
+
+    // Define the properties and data for the API request
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`,
+            "x-api-key" : "scoe-hackathon-app",
+            "x-gw-ims-org-id" : "154340995B76EEF60A494007@AdobeOrg"
+        },
+        body: JSON.stringify({
+	        "conversation_id": conversation_id,
+            "dialogue":{
+                "question": userText
+            }
+        })
+    }
+
+    // Send POST request to API, get response and set the reponse as paragraph element text
+    try {
+        const response = await (await fetch(API_URL, requestOptions)).json();
+        console.log(response, "::::response");
+        pElement.textContent = response.dialogue.answer;
+    } catch (error) { // Add error class to the paragraph element and set error text
+        pElement.classList.add("error");
+        pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
+    }
+
+    // Remove the typing animation, append the paragraph element and save the chats to local storage
+    incomingChatDiv.querySelector(".typing-animation").remove();
+    incomingChatDiv.querySelector(".chat-details").appendChild(pElement);
+    localStorage.setItem("all-chats", chatContainer.innerHTML);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+    //(incomingChatDiv, userText, conversationID);
+
 }
 
 const copyResponse = (copyBtn) => {
@@ -76,7 +226,7 @@ const copyResponse = (copyBtn) => {
     setTimeout(() => copyBtn.textContent = "content_copy", 1000);
 }
 
-const showTypingAnimation = () => {
+const showTypingAnimation = (userText) => {
     // Display the typing animation and call the getChatResponse function
     const html = `<div class="chat-content">
                     <div class="chat-details">
@@ -93,13 +243,14 @@ const showTypingAnimation = () => {
     const incomingChatDiv = createChatElement(html, "incoming");
     chatContainer.appendChild(incomingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    getChatResponse(incomingChatDiv);
+    console.log("incoming chat div ::::", incomingChatDiv);
+    getConversation(incomingChatDiv, userText);
 }
 
 const handleOutgoingChat = () => {
     userText = chatInput.value.trim(); // Get chatInput value and remove extra spaces
     if(!userText) return; // If chatInput is empty return from here
-
+    console.log(userText, "userText :::;")
     // Clear the input field and reset its height
     chatInput.value = "";
     chatInput.style.height = `${initialInputHeight}px`;
@@ -116,7 +267,7 @@ const handleOutgoingChat = () => {
     chatContainer.querySelector(".default-text")?.remove();
     chatContainer.appendChild(outgoingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    setTimeout(showTypingAnimation, 500);
+    setTimeout(showTypingAnimation(userText), 500);
 }
 
 deleteButton.addEventListener("click", () => {
