@@ -19,14 +19,6 @@ const loadDataFromLocalstorage = () => {
 
     const defaultText = `<div class="default-text">
 
- 
-
-    <h1>Target GPT</h1>
-
-
-
-    <p>Your one stop solution to all questions related to Target.<br> Let's get start with your queries in our chat section!</p>
-
 
 
 </div>
