@@ -391,7 +391,7 @@ span.material-symbols-rounded {
 .chatbox {
   width: 75%;
   height: 100vh;
-  background-image: url(https://business.adobe.com/blog/the-latest/media_1e332ff….png?width=2000&format=webply&optimize=medium);
+  background-image: url('https://business.adobe.com/blog/the-latest/media_1e332ff7a9de723784208830e66415291e0120f8b.png?width=2000&format=webply&optimize=medium');
   background-size: cover;
   background-position: center;
 }
