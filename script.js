@@ -334,7 +334,7 @@ chatInput.addEventListener("keydown", (e) => {
     }
 });
 
-document.querySelector('.typing-textarea.faq span#send-btn').addEventListener("click",handleOutgoingChat)
+//document.querySelector('.typing-textarea.faq span#send-btn').addEventListener("click",handleOutgoingChat)
 
 loadDataFromLocalstorage();
 sendButton.addEventListener("click", handleOutgoingChat);
