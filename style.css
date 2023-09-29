@@ -343,7 +343,7 @@ span.material-symbols-rounded {
 
 .intro-container {
   width: 25rem;
-  background-image: url(https://cimage.adobe.com/hackaton/graphic3.png);
+  background-color: #f2eef3;
   border-right: 1.5px solid #D9D9E3;
 }
 
@@ -391,6 +391,9 @@ span.material-symbols-rounded {
 .chatbox {
   width: 75%;
   height: 100vh;
+  background-image: url(https://business.adobe.com/blog/the-latest/media_1e332ff….png?width=2000&format=webply&optimize=medium);
+  background-size: cover;
+  background-position: center;
 }
 
 .exp-button {
