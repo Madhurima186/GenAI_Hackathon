@@ -19,6 +19,14 @@ const loadDataFromLocalstorage = () => {
 
     const defaultText = `<div class="default-text">
 
+ 
+
+    <h1>Target GPT</h1>
+
+
+
+    <p>Your one stop solution to all questions related to Target.<br> Let's get start with your queries in our chat section!</p>
+
 
 
 </div>
@@ -27,13 +35,13 @@ const loadDataFromLocalstorage = () => {
 
 <div class="typing-textarea faq">
 
-<textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required="" style="height: 55px;"></textarea>
+<textarea id="chat-input" spellcheck="false" placeholder="steps to setup ab test in adobe target" required="" style="height: 55px;"></textarea>
 
 <span id="send-btn" class="material-symbols-rounded">send</span>
 
 </div><div class="typing-textarea faq">
 
-<textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required="" style="height: 55px;"></textarea>
+<textarea id="chat-input" spellcheck="false" placeholder="steps to setup profile script for page visits" required="" style="height: 55px;"></textarea>
 
 <span id="send-btn" class="material-symbols-rounded">send</span>
 
