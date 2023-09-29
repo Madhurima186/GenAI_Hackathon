@@ -330,6 +330,10 @@ chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
         handleOutgoingChat();
+        if(document.querySelector('.chat-container .chat.outgoing')){
+            document.querySelector('.frequently-asked').style.display = 'none';
+        }
+
     }
 });
 
