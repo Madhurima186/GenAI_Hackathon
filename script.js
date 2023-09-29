@@ -29,13 +29,13 @@ const loadDataFromLocalstorage = () => {
 
 <div class="typing-textarea faq">
 
-<textarea id="chat-input" spellcheck="false" placeholder="steps to setup ab test in adobe target" required="" style="height: 55px;"></textarea>
+<textarea spellcheck="false" placeholder="steps to setup ab test in adobe target" required="" style="height: 55px;" disabled></textarea>
 
 <span id="send-btn" class="material-symbols-rounded">send</span>
 
 </div><div class="typing-textarea faq">
 
-<textarea id="chat-input" spellcheck="false" placeholder="steps to setup profile script for page visits" required="" style="height: 55px;"></textarea>
+<textarea spellcheck="false" placeholder="steps to setup profile script for page visits" required="" style="height: 55px;" disabled></textarea>
 
 <span id="send-btn" class="material-symbols-rounded">send</span>
 
@@ -47,6 +47,13 @@ const loadDataFromLocalstorage = () => {
 
     chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
     chatContainer.scrollTo(0, chatContainer.scrollHeight); // Scroll to bottom of the chat container
+    document.querySelectorAll('.typing-textarea.faq').forEach(function(item){
+        if(item){
+            item.querySelector('#send-btn').addEventListener('click', function(){
+                handleOutgoingChat(item.querySelector('textarea'))
+            })
+        }
+    })
 }
 
 const createChatElement = (content, className) => {
@@ -271,13 +278,16 @@ const showTypingAnimation = (userText) => {
     getConversation(incomingChatDiv, userText);
 }
 
-const handleOutgoingChat = () => {
-    userText = chatInput.value.trim(); // Get chatInput value and remove extra spaces
+const handleOutgoingChat = (ele) => {
+    userText = ele.value?.trim(); // Get chatInput value and remove extra spaces
+    if(ele.parentElement.classList.contains('faq')){
+        userText = ele.placeholder;
+    }
     if(!userText) return; // If chatInput is empty return from here
     console.log(userText, "userText :::;")
     // Clear the input field and reset its height
-    chatInput.value = "";
-    chatInput.style.height = `${initialInputHeight}px`;
+    ele.value = "";
+    ele.style.height = `${initialInputHeight}px`;
 
     const html = `<div class="chat-content">
                     <div class="chat-details">
@@ -328,7 +338,7 @@ chatInput.addEventListener("keydown", (e) => {
     // than 800 pixels, handle the outgoing chat
     if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
-        handleOutgoingChat();
+        handleOutgoingChat(chatInput);
         
 
     }
@@ -337,4 +347,4 @@ chatInput.addEventListener("keydown", (e) => {
 //document.querySelector('.typing-textarea.faq span#send-btn').addEventListener("click",handleOutgoingChat)
 
 loadDataFromLocalstorage();
-sendButton.addEventListener("click", handleOutgoingChat);
+//sendButton.addEventListener("click", handleOutgoingChat);
