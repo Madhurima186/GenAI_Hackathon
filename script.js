@@ -18,9 +18,38 @@ const loadDataFromLocalstorage = () => {
     themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 
     const defaultText = `<div class="default-text">
-                            <h1>Target GPT</h1>
-                            <p>Start a conversation and explore the power of AI.<br> Your chat history will be displayed here.</p>
-                        </div>`
+
+ 
+
+    <h1>Target GPT</h1>
+
+
+
+    <p>Your one stop solution to all questions related to Target.<br> Let's get start with your queries in our chat section!</p>
+
+
+
+</div>
+
+<div class="frequently-asked">
+
+<div class="typing-textarea faq">
+
+<textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required="" style="height: 55px;"></textarea>
+
+<span id="send-btn" class="material-symbols-rounded">send</span>
+
+</div><div class="typing-textarea faq">
+
+<textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required="" style="height: 55px;"></textarea>
+
+<span id="send-btn" class="material-symbols-rounded">send</span>
+
+</div>
+
+   
+
+</div>`
 
     chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
     chatContainer.scrollTo(0, chatContainer.scrollHeight); // Scroll to bottom of the chat container
@@ -230,7 +259,8 @@ const showTypingAnimation = (userText) => {
     // Display the typing animation and call the getChatResponse function
     const html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="images/chatbot.jpg" alt="chatbot-img">
+                    <img src="https://exc-unifiedcontent.experience.adobe.net/assets/CircleExperienceCloud.69d1dfda.svg" alt="chatbot-img">
+                    <h5>Target GPT</h5>
                         <div class="typing-animation">
                             <div class="typing-dot" style="--delay: 0.2s"></div>
                             <div class="typing-dot" style="--delay: 0.3s"></div>
@@ -257,7 +287,8 @@ const handleOutgoingChat = () => {
 
     const html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="images/user.jpg" alt="user-img">
+                    <img src="https://jira.corp.adobe.com/secure/useravatar?avatarId=48114" alt="user-img">
+                    <h5>Harry Potter</h5>
                         <p>${userText}</p>
                     </div>
                 </div>`;
