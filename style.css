@@ -5,7 +5,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+  font-weight: 700;
 }
 
 :root {
@@ -238,18 +239,19 @@ span.material-symbols-rounded {
   width: 100%;
   border: none;
   padding: 15px 45px 15px 20px;
-  color: var(--text-color);
+  color: aliceblue;
   font-size: 1rem;
   border-radius: 4px;
   max-height: 250px;
+  background: aliceblue;
+  opacity: 0.95;
   overflow-y: auto;
-  background: var(--incoming-chat-bg);
   outline: 1px solid var(--incoming-chat-border);
   font-family: adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
 }
 
 .typing-textarea textarea::placeholder {
-  color: var(--placeholder-color);
+  color: #3bafcc;
 }
 
 .typing-content span {
@@ -260,7 +262,7 @@ span.material-symbols-rounded {
   font-size: 1.35rem;
   align-items: center;
   justify-content: center;
-  color: var(--icon-color);
+  color: #3bafcc;
 }
 
 .typing-textarea span {
@@ -281,7 +283,7 @@ span.material-symbols-rounded {
 .typing-controls span {
   margin-left: 7px;
   font-size: 1.4rem;
-  background: var(--incoming-chat-bg);
+  background: aliceblue;
   outline: 1px solid var(--incoming-chat-border);
 }
 
@@ -343,7 +345,7 @@ span.material-symbols-rounded {
 
 .intro-container {
   width: 25rem;
-  background-color: #f2eef3;
+  background-image: linear-gradient(#f0c099, #e592a9, #f2eef3,#3bafcc);
   border-right: 1.5px solid #D9D9E3;
 }
 
@@ -459,5 +461,5 @@ h5 {
   font-size: 1.35rem;
   align-items: center;
   justify-content: center;
-  color: var(--icon-color);
+  color: #3bafcc;
 }
