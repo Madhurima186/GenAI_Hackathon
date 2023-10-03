@@ -370,7 +370,7 @@ span.material-symbols-rounded {
   margin: 2rem 0rem;
   font-family: adobe-clean, Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
   line-height: 30px;
-  color: lightyellow;
+  color: palevioletred;
   font-size: 18.5px;
 
 
@@ -378,7 +378,7 @@ span.material-symbols-rounded {
 
 .intro-container h2 {
     display: flex;
-    color: lightyellow;
+    color: crimson;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -448,6 +448,10 @@ h5 {
 .typing-textarea.faq {
   width: 25rem;
   position: relative;
+}
+
+.text-content{
+  margin-top:50%;
 }
 
 .typing-textarea.faq span#send-btn {
