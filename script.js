@@ -4,7 +4,7 @@ const chatContainer = document.querySelector(".chat-container");
 const themeButton = document.querySelector("#theme-btn");
 const deleteButton = document.querySelector("#delete-btn");
 let conversation_id = "";
-let emeraldContext = true;
+let emeraldContext = false;
 const pElement = document.createElement("p");
 
 let userText = null;
