@@ -292,7 +292,7 @@ const handleOutgoingChat = (ele) => {
     const html = `<div class="chat-content">
                     <div class="chat-details">
                     <img src="https://jira.corp.adobe.com/secure/useravatar?avatarId=48114" alt="user-img">
-                    <h5>Harry Potter</h5>
+                    <h5>Tom</h5>
                         <p>${userText}</p>
                     </div>
                 </div>`;
